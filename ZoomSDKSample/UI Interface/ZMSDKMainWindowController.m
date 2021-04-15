@@ -324,12 +324,16 @@
     {
         [_settingWindowController.window makeKeyAndOrderFront:nil];
         [_settingWindowController showWindow:nil];
+        
+        ZoomSDKSettingService* setting = [[ZoomSDK sharedSDK] getSettingService];
+        [[setting getGeneralSetting] hideSettingComponent:SettingComponent_RecordingFeatureTab hide:NO];
     }
     else
     {
         ZoomSDKSettingService* setting = [[ZoomSDK sharedSDK] getSettingService];
         [[setting getGeneralSetting] hideSettingComponent:SettingComponent_AdvancedFeatureButton hide:YES];
         [[setting getGeneralSetting] hideSettingComponent:SettingComponent_AdvancedFeatureTab hide:YES];
+        [[setting getGeneralSetting] hideSettingComponent:SettingComponent_RecordingFeatureTab hide:NO];
 
         ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
         ZoomSDKMeetingUIController* controller = [meetingService getMeetingUIController];

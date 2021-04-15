@@ -73,7 +73,7 @@ const int DEFAULT_Thumbnail_View_Width = 320;
 @end
 
 
-@interface ZMSDKMeetingMainWindowController ()
+@interface ZMSDKMeetingMainWindowController () <ZoomSDKMeetingRecordDelegate>
 {
     ZoomSDKActiveVideoElement* _activeUserVideo;
     ZMSDKShareSelectWindow*    _shareSelectWindowCtr;
@@ -115,6 +115,7 @@ const int DEFAULT_Thumbnail_View_Width = 320;
         _activeUserVideo = nil;
         [self initNotification];
         [self initUI];
+
         return self;
     }
     return nil;
@@ -378,10 +379,15 @@ const int DEFAULT_Thumbnail_View_Width = 320;
     theButton = nil;
     xposRight += width + margin;
 }
+
 - (void)onLeaveMeetingButtonClicked:(id)sender
 {
-    ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
-    [meetingService leaveMeetingWithCmd:(LeaveMeetingCmd_End)];
+    time_t timeStamp = [[NSDate date] timeIntervalSinceNow];
+    ZoomSDKMeetingRecordController *record = [[[ZoomSDK sharedSDK] getMeetingService] getRecordController];
+    ZoomSDKError error = [record stopRecording:&timeStamp];
+    if (error == ZoomSDKError_Success) {
+        NSLog(@"StopRecordingSuccess");
+    }
 }
 - (void)onThumbnailButtonClicked:(id)sender
 {
@@ -432,6 +438,7 @@ const int DEFAULT_Thumbnail_View_Width = 320;
     {
         case Audio_Status_UnMuted:
         {
+            
             ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
             [[meetingService getMeetingActionController] actionMeetingWithCmd:ActionMeetingCmd_MuteAudio userID:0 onScreen:ScreenType_First];
         }
@@ -521,6 +528,79 @@ const int DEFAULT_Thumbnail_View_Width = 320;
     [self updateToolbarAudioButton];
     [self updateToolbarVideoButton];
     [self initiateTimer];
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self startRecord];
+    });
+    
+    ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
+    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_MeetingID]]);
+    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_MeetingNumber]]);
+    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_JoinMeetingUrl]]);
+}
+
+-(void)startRecord {
+    NSArray *paths=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    time_t timeStamp = [[NSDate date] timeIntervalSinceNow];
+    ZoomSDKMeetingRecordController *record = [[[ZoomSDK sharedSDK] getMeetingService] getRecordController];
+    [record setDelegate:self];
+    ZoomSDKError canStartRecording = [record canStartRecording:NO];
+    if (canStartRecording == ZoomSDKError_Success) {
+        NSLog(@"canStartRecordingSuccess");
+    }
+    
+    ZoomSDKError isSupportLocalRecording = [record isSupportLocalRecording:self.mySelfUserInfo.getUserID];
+    if (isSupportLocalRecording == ZoomSDKError_Success) {
+        NSLog(@"isSupportLocalRecordingSuccess");
+    }
+    
+    ZoomSDKError allowRecordingSupported = [record allowLocalRecording:YES User:self.mySelfUserInfo.getUserID];
+    if (allowRecordingSupported == ZoomSDKError_Success) {
+        NSLog(@"allowRecordingSupportedSuccess");
+    }
+    
+    [record startRecording:&timeStamp saveFilePath:documentsDirectory];
+    ZoomSDKError error = [record requestCustomizedLocalRecordingNotification:YES];
+    if (error == ZoomSDKError_Success) {
+        NSLog(@"requestCustomizedLocalRecordingNotificationSuccess");
+    }
+}
+
+- (void)onRecord2MP4Done:(BOOL)success Path:(NSString *)recordPath {
+    if (success) {
+        NSString *filePath = [NSString stringWithFormat:@"%@meetingrec_0.mp4",recordPath];
+        
+        NSURL *url = [NSURL fileURLWithPath:filePath];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
+        [meetingService leaveMeetingWithCmd:(LeaveMeetingCmd_End)];
+    }
+}
+
+- (void)onCustomizedRecordingSourceReceived:(CustomizedRecordingLayoutHelper *)helper {
+    ZoomSDKError error = [helper selectShareSource:RecordingLayoutMode_VideoWall];
+    if (error == ZoomSDKError_Success) {
+        NSLog(@"selectShareSourceSuccess");
+    }
+    
+    ZoomSDKError error2 = [helper selectActiveVideoSource];
+    if (error2 == ZoomSDKError_Success) {
+        NSLog(@"selectActiveVideoSourceSuccess");
+    }
+    
+    NSArray *users = [[[[ZoomSDK sharedSDK] getMeetingService] getMeetingActionController] getParticipantsList];
+    for (NSNumber* userID in users)
+    {
+        ZoomSDKError error3 = [helper addVideoSourceToResArray:userID.unsignedIntValue];
+        if (error3 == ZoomSDKError_Success) {
+            NSLog(@"addVideoSourceToResArraySuccess");
+        }
+    }
 }
 
 -(void)initiateTimer
@@ -573,11 +653,6 @@ const int DEFAULT_Thumbnail_View_Width = 320;
 {
     [_panelistUserView onUserJoin:userID];
     [_thumbnailView onUserJoin:userID];
-    
-    ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
-    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_MeetingID]]);
-    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_MeetingNumber]]);
-    NSLog([NSString stringWithFormat:@"%@",[meetingService getMeetingProperty:MeetingPropertyCmd_JoinMeetingUrl]]);
 }
 
 - (void)initActiveVideoUserView
@@ -881,6 +956,7 @@ const int DEFAULT_Thumbnail_View_Width = 320;
         }
     }
 }
+
 
 @end
 
