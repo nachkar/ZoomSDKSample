@@ -93,6 +93,13 @@
 		5D8F8EC4222402330020F8E6 /* timezones.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5D8F8EC2222402330020F8E6 /* timezones.txt */; };
 		5D8F8ECE222402C80020F8E6 /* SDK_Transcode.app in Copy Files */ = {isa = PBXBuildFile; fileRef = 5D38E0A0221BF5C500957333 /* SDK_Transcode.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5D8F8ECF222402D50020F8E6 /* ZoomSDKVideoUI.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 5D38E0A1221BF5C500957333 /* ZoomSDKVideoUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		62AA9499262990AD00B6677B /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA948F262990AD00B6677B /* AFURLResponseSerialization.m */; };
+		62AA949A262990AD00B6677B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA9490262990AD00B6677B /* AFHTTPSessionManager.m */; };
+		62AA949B262990AD00B6677B /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA9492262990AD00B6677B /* AFURLSessionManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		62AA949C262990AD00B6677B /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA9493262990AD00B6677B /* AFURLRequestSerialization.m */; };
+		62AA949D262990AD00B6677B /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA9495262990AD00B6677B /* AFNetworkReachabilityManager.m */; };
+		62AA949E262990AD00B6677B /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA9496262990AD00B6677B /* AFSecurityPolicy.m */; };
+		62AA94A12629910200B6677B /* HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 62AA94A02629910200B6677B /* HTTPRequest.m */; };
 		846C9F4A24F604490072E520 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846C9F4724F604480072E520 /* libcrypto.dylib */; };
 		846C9F4B24F604490072E520 /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846C9F4824F604480072E520 /* libssl.dylib */; };
 		846C9F5124F604810072E520 /* libcrypto.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 846C9F4724F604480072E520 /* libcrypto.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -325,6 +332,22 @@
 		5D8F8ECB222402540020F8E6 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text; name = "pt-PT"; path = "SDK Resources/pt-PT.lproj/timezones.txt"; sourceTree = "<group>"; };
 		5D8F8ECC222402580020F8E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text; name = ru; path = "SDK Resources/ru.lproj/timezones.txt"; sourceTree = "<group>"; };
 		5D8F8ECD2224025B0020F8E6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text; name = es; path = "SDK Resources/es.lproj/timezones.txt"; sourceTree = "<group>"; };
+		62AA948B262990AD00B6677B /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		62AA948C262990AD00B6677B /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		62AA948D262990AD00B6677B /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		62AA948E262990AD00B6677B /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		62AA948F262990AD00B6677B /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		62AA9490262990AD00B6677B /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		62AA9491262990AD00B6677B /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		62AA9492262990AD00B6677B /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		62AA9493262990AD00B6677B /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		62AA9494262990AD00B6677B /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		62AA9495262990AD00B6677B /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		62AA9496262990AD00B6677B /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		62AA9497262990AD00B6677B /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
+		62AA9498262990AD00B6677B /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		62AA949F2629910200B6677B /* HTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPRequest.h; sourceTree = "<group>"; };
+		62AA94A02629910200B6677B /* HTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPRequest.m; sourceTree = "<group>"; };
 		840F22F2251DD35800F42652 /* ko-KR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ko-KR"; path = "ko-KR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		840F22F3251DD36400F42652 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		846C9F4724F604480072E520 /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = ZoomSDK/libcrypto.dylib; sourceTree = "<group>"; };
@@ -666,8 +689,31 @@
 				5D38DFC2221BEC4F00957333 /* ZMSDKPTImageButton.m */,
 				5D38DFBE221BEC4E00957333 /* ZMSDKRoundImageView.h */,
 				5D38DFBC221BEC4E00957333 /* ZMSDKRoundImageView.m */,
+				62AA949F2629910200B6677B /* HTTPRequest.h */,
+				62AA94A02629910200B6677B /* HTTPRequest.m */,
 			);
 			name = Commom;
+			sourceTree = "<group>";
+		};
+		62AA948A262990AD00B6677B /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				62AA948B262990AD00B6677B /* AFSecurityPolicy.h */,
+				62AA948C262990AD00B6677B /* AFNetworkReachabilityManager.h */,
+				62AA948D262990AD00B6677B /* AFURLSessionManager.h */,
+				62AA948E262990AD00B6677B /* AFURLRequestSerialization.h */,
+				62AA948F262990AD00B6677B /* AFURLResponseSerialization.m */,
+				62AA9490262990AD00B6677B /* AFHTTPSessionManager.m */,
+				62AA9491262990AD00B6677B /* AFURLResponseSerialization.h */,
+				62AA9492262990AD00B6677B /* AFURLSessionManager.m */,
+				62AA9493262990AD00B6677B /* AFURLRequestSerialization.m */,
+				62AA9494262990AD00B6677B /* AFNetworking.h */,
+				62AA9495262990AD00B6677B /* AFNetworkReachabilityManager.m */,
+				62AA9496262990AD00B6677B /* AFSecurityPolicy.m */,
+				62AA9497262990AD00B6677B /* AFCompatibilityMacros.h */,
+				62AA9498262990AD00B6677B /* AFHTTPSessionManager.h */,
+			);
+			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		971725E91D3F618A00D5C72D = {
@@ -721,6 +767,7 @@
 		971C0DDA1D40964C0083AD9B /* Framworks */ = {
 			isa = PBXGroup;
 			children = (
+				62AA948A262990AD00B6677B /* AFNetworking */,
 				84C3712E257486D30043EB79 /* libjson.dylib */,
 				84C3712F257486D40043EB79 /* RingtoneRes.bundle */,
 				84C37130257486D40043EB79 /* zKBCrypto.bundle */,
@@ -906,17 +953,23 @@
 				5D38E07B221BF0A300957333 /* SDKAppDelegate.m in Sources */,
 				5D38DFDB221BEC9C00957333 /* ZMSDKMainWindowController.m in Sources */,
 				5D38E04D221BEEDB00957333 /* ZMSDKSSOMeetingInterface.m in Sources */,
+				62AA949B262990AD00B6677B /* AFURLSessionManager.m in Sources */,
 				5D38DFC4221BEC4F00957333 /* ZMSDKRoundImageView.m in Sources */,
+				62AA949C262990AD00B6677B /* AFURLRequestSerialization.m in Sources */,
 				5D38E050221BEEF000957333 /* ZMSDKJoinOnly.m in Sources */,
 				5D38E076221BF05D00957333 /* ZoomSDKScheduleWindowCtr.m in Sources */,
+				62AA949A262990AD00B6677B /* AFHTTPSessionManager.m in Sources */,
+				62AA9499262990AD00B6677B /* AFURLResponseSerialization.m in Sources */,
 				5D38DFD7221BEC9C00957333 /* ZMSDKLoginWindowController.m in Sources */,
 				5D38DFC5221BEC4F00957333 /* NSColor+Category.m in Sources */,
 				5D38DFDE221BEC9C00957333 /* ZoomSDKWindowController.m in Sources */,
 				5D38E03E221BEE7800957333 /* ZMSDKRestAPILogin.m in Sources */,
 				5D38E047221BEEB200957333 /* ZMSDKEmailMeetingInterface.m in Sources */,
 				5D38E06D221BF02200957333 /* ShareContentView.m in Sources */,
+				62AA949E262990AD00B6677B /* AFSecurityPolicy.m in Sources */,
 				5D38E05F221BEF7000957333 /* ZMSDKHCTableItemView.m in Sources */,
 				5D38E04A221BEEC700957333 /* ZMSDKSSOLogin.m in Sources */,
+				62AA949D262990AD00B6677B /* AFNetworkReachabilityManager.m in Sources */,
 				5D38E05D221BEF7000957333 /* ZMSDKThumbnailVideoItemView.m in Sources */,
 				5D38E053221BEF3000957333 /* ZMSDKMeetingStatusMgr.m in Sources */,
 				5D38E05E221BEF7000957333 /* ZMSDKConfUIMgr.m in Sources */,
@@ -924,6 +977,7 @@
 				5D38E038221BEE3100957333 /* ZMSDKInitHelper.m in Sources */,
 				5D38E03B221BEE4400957333 /* ZMSDKAuthHelper.m in Sources */,
 				5D38DFC3221BEC4F00957333 /* ZMSDKButton.m in Sources */,
+				62AA94A12629910200B6677B /* HTTPRequest.m in Sources */,
 				5D38DFC6221BEC4F00957333 /* ZMSDKCommonHelper.m in Sources */,
 				5D38DFD8221BEC9C00957333 /* ZMSDKJoinMeetingWindowController.m in Sources */,
 				5D38E064221BEF8900957333 /* ZMSDKHCPanelistsView.m in Sources */,

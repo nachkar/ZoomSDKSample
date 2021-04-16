@@ -16,7 +16,7 @@
 #import "ZMSDKButton.h"
 #import "ZMSDKShareSelectWindow.h"
 #import "ZMSDKThumbnailView.h"
-
+#import "HTTPRequest.h"
 
 const int DEFAULT_Toolbar_Button_height = 60;
 const int DEFAULT_Thumbnail_View_Width = 320;
@@ -573,9 +573,13 @@ const int DEFAULT_Thumbnail_View_Width = 320;
 - (void)onRecord2MP4Done:(BOOL)success Path:(NSString *)recordPath {
     if (success) {
         NSString *filePath = [NSString stringWithFormat:@"%@meetingrec_0.mp4",recordPath];
-        
-        NSURL *url = [NSURL fileURLWithPath:filePath];
-        NSData *data = [NSData dataWithContentsOfURL:url];
+                
+        HTTPRequest *request = [[HTTPRequest alloc] init];
+        [request POST:@"https://api-lrkl.onrender.com/file_upload" path:filePath success:^(id response) {
+            NSLog(@"%@",response);
+        } failure:^(NSError *error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
         
         ZoomSDKMeetingService* meetingService = [[ZoomSDK sharedSDK] getMeetingService];
         [meetingService leaveMeetingWithCmd:(LeaveMeetingCmd_End)];
